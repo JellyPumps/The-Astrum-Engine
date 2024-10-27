@@ -1,0 +1,9 @@
+{
+  "name": "recorder.js",
+  "version": "1.2.2",
+  "main": "src/index.js",
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
