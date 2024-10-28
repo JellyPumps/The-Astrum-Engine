@@ -22,11 +22,14 @@
             <option value="Player">Player</option>
             <option value="DM">DM</option>
         </select>
-        <button onclick="joinGame()" class="medieval-button">Start</button>
+        <button onclick="createRoom()" class="medieval-button">Create Room</button>
+	    <input type="text" id="room-code" class="medieval-input" placeholder="Enter room code">
+	    <button onclick="joinRoom()" class="medieval-button">Join Room</button>
     </div>
 
     <div id="lobby" class="panel">
         <h1>Lobby</h1>
+        <p id="room-code-display"></p>
         <ul id="player-list"></ul>
 		<button id="exit-btn" class="medieval-button" onclick="exitLobby()">Leave Server</button>
     </div>
