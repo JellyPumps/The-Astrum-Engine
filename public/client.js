@@ -12,19 +12,44 @@ const chatInput = document.getElementById('chat-input');
 
 chatbox.style.display = 'none';
 
-// Join game function
-function joinGame() {
+let currentRoom = '';
+
+// Create room
+function createRoom() {
 	const name = document.getElementById('name').value;
 	const role = document.getElementById('role').value;
-	if (name) {
-		socket.emit('join', { name, role });
-		document.getElementById('main-menu').style.display = 'none';
-		document.getElementById('lobby').style.display = 'block';
-	}
+	if (name) { socket.emit('createRoom', { name, role }); }
+	
+}
 
-	// Enable chat after joining
+// Handle room created event
+socket.on('roomCreated', (roomCode) => {
+	currentRoom = roomCode;
+	
+	document.getElementById('room-code-display').textContent = `Room Code: ${roomCode}`;
+	document.getElementById('main-menu').style.display = 'none';
+	document.getElementById('lobby').style.display = 'block';
+
 	chatbox.style.display = 'block';
 	chatInput.disabled = false;
+});
+
+// Join room function
+function joinRoom() {
+	const roomCode = document.getElementById('room-code').value;
+	const name = document.getElementById('name').value;
+	const role = document.getElementById('role').value;
+	if (name && roomCode) {
+		socket.emit('joinRoom', { roomCode, name, role });
+		currentRoom = roomCode;
+
+		document.getElementById('main-menu').style.display = 'none';
+		document.getElementById('lobby').style.display = 'block';
+
+		// Enable chat after joining
+		chatbox.style.display = 'block';
+		chatInput.disabled = false;
+	}
 }
 
 function exitLobby() {
@@ -47,7 +72,7 @@ function exitLobby() {
 chatSendButton.addEventListener('click', () => {
 	const message = chatInput.value.trim();
 	if (message) {
-	  socket.emit('chatMessage', message);
+	  socket.emit('chatMessage', { roomCode: currentRoom, msg: message });
 	  chatInput.value = ''; // Clear input field after sending
 	}
 });
@@ -57,21 +82,10 @@ chatInput.addEventListener('keydown', (event) => {
 		chatSendButton.click();
 	}
 });
-  
+
 // Display received chat messages
-socket.on('chatMessage', ({ msg, playerId }, players) => {
+socket.on('chatMessage', (messageData) => {
 	const messageItem = document.createElement('li');
-	const player = players.find(p => p.id === playerId); // Find the player using playerId
-	const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-	let messageData;
-
-	if (player) {
-		messageData = `| ${timestamp} |${player.name} says: "${msg}"`;
-	} else {
-		console.error('Failed to find player for chat message:', msg);
-	}
-
 	messageItem.textContent = messageData;
 	chatMessages.appendChild(messageItem);  
 	chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -86,4 +100,9 @@ socket.on('playerList', (players) => {
 		playerItem.textContent = `${player.name} (${player.role})`;
 		playerList.appendChild(playerItem);
 	});
+});
+
+// Error handling
+socket.on('error', (msg) => {
+	alert(msg);
 });
