@@ -53,7 +53,7 @@ io.on('connection', (socket) => {
 	socket.on('disconnect', () => {
 		// Find and remove player from rooms
 		for (const roomCode in rooms) {
-			rooms[roomCode] = rooms[roomCode].players.filter((player) => player.id !== socket.id);
+			rooms[roomCode].players = rooms[roomCode].players.filter((player) => player.id !== socket.id);
 
 			// Update room player list
 			io.to(roomCode).emit('playerList', rooms[roomCode].players);
