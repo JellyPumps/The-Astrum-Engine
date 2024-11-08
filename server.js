@@ -29,6 +29,7 @@ io.on('connection', (socket) => {
 		socket.emit('roomCreated', roomCode);
 		io.to(roomCode).emit('playerList', rooms[roomCode].players);
 		console.log(`Room ${roomCode} created by ${player.name}`);
+		console.log(`Player list:`, rooms[roomCode].players);
 	});
 
 	// Handle player joining a room
@@ -45,6 +46,7 @@ io.on('connection', (socket) => {
 			// Notify the client
 			socket.emit('roomJoined', roomCode);
 			console.log(`${name} joined room ${roomCode}`);
+			console.log(`Player list:`, rooms[roomCode].players);
 		}
 		else { socket.emit('error', 'Room not found'); }
 	});
