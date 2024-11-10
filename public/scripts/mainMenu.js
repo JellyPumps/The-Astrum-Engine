@@ -10,6 +10,7 @@ function joinRoom() {
     const role = document.getElementById('role').value;
     if (name && roomCode) {
         socket.emit('joinRoom', { roomCode, name, role });
+        currentRoom = roomCode;
     }
 }
 
