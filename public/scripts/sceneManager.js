@@ -48,8 +48,8 @@ class SceneManager {
     }
 
     removeSceneDepends() {
-        const scripts = document.querySelectorAll(`script[type="text/javascript"][src^='/scripts/${this.currentScene}.js]`);
-        const links = document.querySelectorAll(`link[href^='/css/${this.currentScene}.css]`);
+        const scripts = document.querySelectorAll(`script[type="text/javascript"][src="/scripts/${this.currentScene}.js"]`);
+        const links = document.querySelectorAll(`link[href="/css/${this.currentScene}.css"]`);
 
         scripts.forEach(script => script.remove());
         links.forEach(link => link.remove());
