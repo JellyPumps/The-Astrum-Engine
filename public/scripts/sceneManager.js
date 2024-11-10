@@ -13,35 +13,32 @@ class SceneManager {
         this.sceneData = data;
 
         // Clear current scene if any
-        if (this.sceneName) {
+        if (this.currentSceneName) {
             document.getElementById('scene-container').innerHTML = '';
             this.removeSceneDepends();
         }
 
         // Load new scene
-        await this.loadSceneHTML(sceneName);
-        await this.loadSceneCSS(sceneName);
-        await this.loadSceneJS(sceneName);
+        await this.loadSceneDependencies(sceneName);
     }
 
-    async loadSceneHTML(sceneName) {
+    async loadSceneDependencies(sceneName) {
+        // Load HTML
         const response = await fetch(`/scenes/${sceneName}.html`);
         const html = await response.text();
         document.getElementById('scene-container').innerHTML = html;
-    }
 
-    async loadSceneCSS(sceneName) {
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = `/css/${sceneName}.css`;
-        document.head.appendChild(link);
-    }
- 
-    async loadSceneJS(sceneName) {
-        const script = document.createElement('script');
-        script.type = "text/javascript";
-        script.src = `/scripts/${sceneName}.js`;
-        document.body.appendChild(script);
+        // Load CSS
+        const cssLink = document.createElement('link');
+        cssLink.rel = 'stylesheet';
+        cssLink.href = `/css/${sceneName}.css`;
+        document.head.appendChild(cssLink);
+
+        // Load JavaScript
+        const jsScript = document.createElement('script');
+        jsScript.type = "text/javascript";
+        jsScript.src = `/scripts/${sceneName}.js`;
+        document.body.appendChild(jsScript);
     }
 
     getSceneData() {
