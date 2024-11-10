@@ -1,28 +1,30 @@
 class SceneManager {
     constructor() {
-        this.currentScene = null;
-        this.currentSceneName = '';
+        this.currentScene = '';
         this.sceneData = {};
     }
 
     async loadScene(sceneName, data = {}) {
         // Avoid loading the same scene twice
-        if (this.currentSceneName === sceneName) return;
+        if (this.currentScene === sceneName) return;
 
         // Store the data for the scene
         this.sceneData = data;
 
         // Clear current scene if any
-        if (this.currentSceneName) {
+        if (this.currentScene) {
             document.getElementById('scene-container').innerHTML = '';
             this.removeSceneDepends();
         }
 
         // Load new scene
-        await this.loadSceneDependencies(sceneName);
+        await this.loadSceneDepends(sceneName);
+
+        // Update current scene
+        this.currentScene = sceneName;
     }
 
-    async loadSceneDependencies(sceneName) {
+    async loadSceneDepends(sceneName) {
         // Load HTML
         const response = await fetch(`/scenes/${sceneName}.html`);
         const html = await response.text();
@@ -47,7 +49,7 @@ class SceneManager {
 
     removeSceneDepends() {
         const scripts = document.querySelectorAll(`script[src^='/scripts/${this.currentSceneName}.js]`);
-        const links = document.querySelectorAll(`link[hfref^='/css/${this.currentSceneName}.css]`);
+        const links = document.querySelectorAll(`link[href^='/css/${this.currentSceneName}.css]`);
 
         scripts.forEach(script => script.remove());
         links.forEach(link => link.remove());
