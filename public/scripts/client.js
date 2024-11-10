@@ -1,5 +1,7 @@
 const socket = io();
 
+let currentRoom = '';
+
 // Global event handlers
 socket.on('roomCreated', (roomCode) => {
 	document.dispatchEvent(new CustomEvent('roomCreated', { detail: roomCode }));
