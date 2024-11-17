@@ -4,24 +4,32 @@
 A browser-based multiplayer role-playing game platform inspired by the storytelling traditions of Dungeons & Dragons. It reimagines the tabletop experience, giving DMs and players dynamic tools to collaborate on creating and playing campaigns.
 
 
-## Deployment
+## Getting Started
 
 ### Prerequisites
 
 - Node
 
-To deploy this project run
-
+1. Clone the repository
 ```bash
-  npm run server.js
+git clone https://github.com/JellyPumps/The-Astrum-Engine.git
+cd The-Astrum-Engine/
 ```
 
+2. Install dependencies:
+```bash
+npm install
+```
 
-## Playing
+3. Run the server
+```
+npm run server.js
+```
 
-Players do not have to download the project to play. Simply connect to the server that you have setup locally, or in the cloud with the IP of the host and on port 8081.
+4. Players do not have to download the project to play. Simply connect to the server that you have setup locally, or in the cloud with the IP of the host and on port 8081.
 
 The port can be changed in the `server.js` file.
+
 ## Roadmap
 
 ### Core features
