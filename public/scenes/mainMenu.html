@@ -1,11 +1,22 @@
 <div id="main-menu" class="panel">
     <h1>Main Menu</h1>
-    <input type="text" id="name" class="medieval-input" placeholder="Enter your character name">
-    <select id="role" class="medieval-dropdown">
-        <option value="Player">Player</option>
-        <option value="DM">DM</option>
-    </select>
-    <button onclick="createRoom()" class="medieval-button">Create Room</button>
-    <input type="text" id="room-code" class="medieval-input" placeholder="Enter room code">
-    <button onclick="joinRoom()" class="medieval-button">Join Room</button>
+
+   <!-- Section for Campaign Creation -->
+    <div id="campaign-creation">
+        <h3>Campaign Creation</h3>
+        <button onclick="goToCampaignCreation()" class="medieval-button">Goto Creation Suite</button>
+    </div>
+
+    <!-- Section for Player Information and Room Management -->
+    <div id="player-info">
+        <h3>Multiplayer</h3>
+        <input type="text" id="name" class="medieval-input" placeholder="Enter your character name">
+        <select id="role" class="medieval-dropdown">
+            <option value="Player">Player</option>
+            <option value="DM">DM</option>
+        </select>
+        <input type="text" id="room-code" class="medieval-input" placeholder="Enter room code">
+        <button onclick="createRoom()" class="medieval-button">Create Room</button>
+        <button onclick="joinRoom()" class="medieval-button">Join Room</button>
+    </div>
 </div>
