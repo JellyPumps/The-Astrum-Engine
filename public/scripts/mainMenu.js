@@ -14,6 +14,10 @@ function joinRoom() {
     }
 }
 
+function goToCampaignCreation() {
+    sceneManager.loadScene('campaignCreation');
+}
+
 // Events
 document.addEventListener('roomCreated', (e) => {
     currentRoom = e.detail;
