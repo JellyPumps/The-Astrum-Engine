@@ -15,7 +15,7 @@ function joinRoom() {
 }
 
 function goToCampaignCreation() {
-    sceneManager.loadScene('campaignCreation');
+    sceneManager.loadScene('creatorMenu');
 }
 
 // Events
