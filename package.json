@@ -14,6 +14,6 @@
     "recorder.js": "^1.2.2",
     "simple-peer": "^9.11.1",
     "socket.io": "^4.8.1",
-    "socket.io-stream": "^0.9.1"
+    "socket.io-stream": "^0.5.3"
   }
 }
