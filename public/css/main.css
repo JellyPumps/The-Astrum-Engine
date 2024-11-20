@@ -5,6 +5,17 @@
     src: url('../fonts/BLKCHCRY.TTF');
 }
 
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.8em;
+    }
+    
+    .panel {
+        font-size: 1.5em; /* Reduce overall text size */
+    }
+}
+
+
 body {
     font-family: 'CustomFont', 'Goudy Bookletter 1911', serif;
     margin: 0;
@@ -19,7 +30,7 @@ body {
     overflow: hidden;
 }
 
-#main-menu, #lobby {
+#main-menu, #lobby, #campaign-creator {
     display: none;
     padding: 2%;
     background-image: url('../images/panel.png');
@@ -189,7 +200,7 @@ input[type="text"], select {
     box-shadow: 2px 2px 0px #a67c52; /* Inset shadow effect */
     border-radius: 4px; /* Rounded corners */
     appearance: none; /* Removes default arrow */
-    background-image: url('images/down.png');
+    background-image: url('../images/down.png');
     background-repeat: no-repeat;
     background-position: right 10px center;
     transition: all 0.3s ease;
