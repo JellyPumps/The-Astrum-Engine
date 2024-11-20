@@ -1,0 +1,22 @@
+<div id="campaign-creator" class="panel">
+    <div id="new-campaign-section">
+        <h3>Create a New Campaign</h3>
+        <input type="text" id="new-campaign-name" class="medieval-input" placeholder="Enter campaign name">
+        <button onclick="createNewCampaign()" class="medieval-button">Create Campaign</button>
+    </div>
+
+    <div id="overlay"></div>
+    <div id="filePrompt">
+        <p>To continue, please upload an imagemap archive:</p>
+        <input class="medieval-input" type="file" id="fileInput" accept=".zip">
+        <br><br>
+        <button class="medieval-button" onclick="handleFileSelection()">OK</button>
+        <button class="medieval-button" onclick="closeFilePrompt()">Cancel</button>
+    </div>
+
+    <div id="load-campaign-section">
+        <h3>Load Existing Campaign</h3>
+        <input type="file" id="file-input" class="medieval-input" accept=".aen">
+        <button onclick="loadCampaign()" class="medieval-button">Load Campaign</button>
+    </div>
+</div>
