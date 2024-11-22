@@ -23,7 +23,7 @@ npm install
 
 3. Run the server
 ```
-npm run server.js
+node server.js
 ```
 
 4. Players do not have to download the project to play. Simply connect to the server that you have setup locally, or in the cloud with the IP of the host and on port 8081.
