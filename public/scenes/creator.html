@@ -1,0 +1,61 @@
+<div id="app">
+    <!-- Left Panel -->
+    <div id="left-panel">
+        <div id="tiles-section">
+            <h2>Tiles</h2>
+            <div class="tile-grid">
+                <button class="tile-button">Tile 1</button>
+                <button class="tile-button">Tile 2</button>
+                <button class="tile-button">Tile 3</button>
+                <button class="tile-button">Tile 4</button>
+                <button class="tile-button">Tile 5</button>
+                <button class="tile-button">Tile 6</button>
+            </div>
+        </div>
+        <div id="metadata-section">
+            <h2>Metadata</h2>
+            <p id="metadata-placeholder">This section contains relevant metadata information.</p>
+            <div id="npc-metadata" style="display: none;">
+                <label for="npc-name">NPC Name:</label>
+                <input id="npc-name" type="text" placeholder="John Doe" class="medieval-input" />
+                
+                <label for="npc-class">NPC Class:</label>
+                <select id="npc-class" class="medieval-dropdown">
+                    <option value="warrior">Warrior</option>
+                    <option value="mage">Mage</option>
+                    <option value="archer">Archer</option>
+                </select>
+                
+                <label for="npc-health">NPC Health:</label>
+                <input id="npc-health" type="number" min="1" class="medieval-input" />
+                
+                <button id="save-npc-metadata" class="medieval-button">Set Metadata & Stats</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Top Dock -->
+    <div id="top-dock">
+        <div class="tool-group">
+            <button id="draw" class="medieval-button">Draw</button>
+            <button id="erase" class="medieval-button">Erase</button>
+            <button id="rectangle" class="medieval-button">Rectangle</button>
+            <button id="pan-tool" class="medieval-button">Pan</button>
+            <button id="select" class="medieval-button">Select</button>
+        </div>
+        <div class="layer-selector-group">
+            <label for="layer-selector" class="layer-label">Layer:</label>
+            <select id="layer-selector" class="medieval-dropdown">
+                <option value="0">World</option>
+                <option value="1">Object</option>
+                <option value="2">NPC</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Grid Container -->
+    <div id="grid-container">
+        <canvas id="grid-canvas" width="800" height="600"></canvas>
+    </div>
+</div>
