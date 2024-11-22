@@ -6,11 +6,20 @@
     </div>
 
     <div id="overlay"></div>
-    <div id="filePrompt">
-        <p>To continue, please upload an imagemap archive:</p>
-        <input class="medieval-input" type="file" id="fileInput" accept=".zip">
+    <div id="filePrompt" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)">
+        <p>To continue, please upload the required files (tilemap, objectmap, and spritemap):</p>
+        <p>Drag and drop your files here, or click to upload:</p>
+        <input 
+            class="medieval-input" 
+            type="file" 
+            id="fileInput" 
+            accept=".bin" 
+            multiple 
+            style="display: none;"
+            onchange="handleFileSelection()"
+        >
+        <button class="medieval-button" onclick="document.getElementById('fileInput').click()">Select Files</button>
         <br><br>
-        <button class="medieval-button" onclick="handleFileSelection()">OK</button>
         <button class="medieval-button" onclick="closeFilePrompt()">Cancel</button>
     </div>
 
