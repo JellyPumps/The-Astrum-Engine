@@ -12,12 +12,37 @@ let players = [];
 
 const rooms = {};
 
+const existingRoomCodes = new Set(Object.keys(rooms));
+
+function generateRoomCode(length = 8) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let result = '';
+
+    for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        result += characters[randomIndex];
+    }
+    return result;
+}
+
 io.on('connection', (socket) => {
 	console.log('A player connected:', socket.id);
 
 	// Handle room creation
 	socket.on('createRoom', (data) => {
-		const roomCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+		let roomCode;
+		let attempts = 0;
+		const maxAttempts = 100;
+
+		do {
+			roomCode = generateRoomCode();
+			attempts++;
+			if (attempts >= maxAttempts) {
+				throw new Error('Unable to generate a unique room code after multiple attempts');
+			}
+
+		} while (existingRoomCodes.has(roomCode));
+
 		rooms[roomCode] = { players: [] };
 
 		// Automatically add the room creator
