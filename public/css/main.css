@@ -199,8 +199,7 @@ input[type="text"], select {
     text-shadow: 1px 1px 0px #a67c52; /* Depth for the text */
     box-shadow: 2px 2px 0px #a67c52; /* Inset shadow effect */
     border-radius: 4px; /* Rounded corners */
-    appearance: none; /* Removes default arrow */
-    background-image: url('../images/down.png');
+    appearance: initial;
     background-repeat: no-repeat;
     background-position: right 10px center;
     transition: all 0.3s ease;
