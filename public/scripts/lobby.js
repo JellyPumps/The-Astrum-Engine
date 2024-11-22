@@ -1,25 +1,47 @@
-window.requestAnimationFrame(() => {
-    // Room code
-    const roomCodeDisplay = document.getElementById('room-code-display');
-    if (roomCodeDisplay && sceneManager.getSceneData().roomCode) {
-        roomCodeDisplay.textContent = `Room Code: ${sceneManager.getSceneData().roomCode}`;
+/**
+ * Handles rendering room code and player list updates.
+ */
+function renderLobby() {
+    /** Make chatbox visible. */
+    const cbElement = document.getElementById('cb');
+    if (cbElement) {
+    chatbox.style.display = 'block';
+    chatInput.disabled = false;
     }
 
-    // Player list
-    document.addEventListener('playerList', (e) => {
-        const players = e.detail;
-        const playerList = document.getElementById('player-list');
-        playerList.innerHTML = '';
+    /** Room code display */
+    const roomCodeDisplay = document.getElementById('room-code-display');
+    const sceneData = sceneManager.getSceneData();
 
-        players.forEach(player => {
+    if (roomCodeDisplay && sceneData && sceneData.roomCode) {
+        roomCodeDisplay.textContent = `Room Code: ${sceneData.roomCode}`;
+    }
+
+    /** Player list updates */
+    document.addEventListener('playerList', (event) => {
+        const players = event.detail;
+        const playerList = document.getElementById('player-list');
+
+        if (playerList) {
+        playerList.innerHTML = '';
+        players.forEach((player) => {
             const playerItem = document.createElement('li');
             playerItem.textContent = `${player.name} (${player.role})`;
             playerList.appendChild(playerItem);
         });
+        }
     });
-});
+}
 
+// Schedule the rendering function in the next animation frame.
+window.requestAnimationFrame(renderLobby);
+
+/**
+ * Exits the current lobby and loads the main menu scene.
+ */
 function exitLobby() {
     socket.emit('exitRoom');
+    chatbox.style.display = 'none';
     sceneManager.loadScene('mainMenu');
 }
+  
