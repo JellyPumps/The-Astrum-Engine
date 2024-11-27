@@ -19,6 +19,10 @@ socket.on('chatMessage', (messageData) => {
 	document.dispatchEvent(new CustomEvent('chatMessage', { detail: messageData }));
 });
 
+socket.on('privateMessage', (messageData) => {
+	document.dispatchEvent(new CustomEvent('privateMessage', { detail: messageData }));
+})
+
 // Error handling
 socket.on('error', (msg) => {
 	alert(msg);

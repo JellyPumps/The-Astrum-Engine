@@ -79,6 +79,10 @@ input[type="text"], select {
 
 /* Chatbox */
 
+body {
+    font-family: 'Garamond', serif; /* Use a serif font for a classic look */
+}
+
 #chatbox {
     position: fixed;
     bottom: 10px;
@@ -87,9 +91,11 @@ input[type="text"], select {
     max-width: 400px; /* Keep it manageable on larger screens */
     right: 5%; /* Adjust for mobile view */
     box-sizing: border-box;
-    background-color: #d4d0c8; /* Light gray, like old Windows XP backgrounds */
-    border: 2px solid #808080; /* Darker border */
+    background-color: #f4e1c1; /* Light parchment-like background */
+    border: 2px solid #8b4513; /* SaddleBrown for a wooden border look */
+    border-radius: 10px; /* Rounded corners for a softer look */
     padding: 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow for depth */
 }
 
 #chat-messages {
@@ -98,13 +104,16 @@ input[type="text"], select {
     margin: 0;
     max-height: 150px;
     overflow-y: auto;
+    background-color: #fff8e1; /* Slightly lighter background for messages */
+    border-radius: 8px; /* Rounded corners */
+    border: 1px solid #8b4513; /* Wooden border */
 }
 
 #chat-messages li {
-    padding: 2px 0;
-    border-bottom: 1px solid #c0c0c0; /* Divider line between messages */
+    padding: 5px;
+    border-bottom: 1px solid #d1a56c; /* Lighter divider line */
     font-size: 14px;
-    color: #000;
+    color: #3b2a1e; /* Darker text color */
     display: flex;
     justify-content: space-between;
 }
@@ -117,30 +126,38 @@ input[type="text"], select {
 
 #input-container {
     display: flex;
-    border-top: 2px solid #808080; /* Matches the border for XP look */
+    border-top: 2px solid #8b4513; /* Matches the wooden border */
     padding: 5px;
-    background-color: #d4d0c8;
+    background-color: #f4e1c1; /* Same as chatbox background */
+    align-items: center; /* Center items vertically */
 }
 
 #chat-input {
     flex: 1;
-    border: 1px solid #808080;
+    border: 1px solid #8b4513; /* Wooden border */
     padding: 5px;
     margin-right: 5px;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Garamond', serif; /* Medieval-style font */
+    min-width: 0;
+    width: 0;
+    flex-grow: 1;
+    border-radius: 5px; /* Rounded corners */
+    background-color: #fff; /* White background for input */
 }
 
 #chat-send {
     padding: 5px 10px;
-    background-color: #d4d0c8;
-    color: #000;
-    border: 1px solid #808080;
+    background-color: #8b4513; /* Wooden button */
+    color: #fff; /* White text */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
     cursor: pointer;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Garamond', serif; /* Medieval-style but more readable font */
+    transition: background-color 0.3s; /* Smooth transition */
 }
 
 #chat-send:hover {
-    background-color: #c0c0c0;
+    background-color: #a0522d; /* Lighter wood color on hover */
 }
 
 /* Button */
