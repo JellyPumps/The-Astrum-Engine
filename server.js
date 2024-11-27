@@ -12,6 +12,8 @@ let players = [];
 
 const rooms = {};
 
+let serverMessage = '';
+
 const existingRoomCodes = new Set(Object.keys(rooms));
 
 function generateRoomCode(length = 8) {
@@ -53,6 +55,11 @@ io.on('connection', (socket) => {
 		// Emit ther room code and update the player list
 		socket.emit('roomCreated', roomCode);
 		io.to(roomCode).emit('playerList', rooms[roomCode].players);
+
+		// Send a chat message to the room when the player creates it
+		const serverMessage = `${player.name} joined ${roomCode}`;
+		io.to(roomCode).emit('chatMessage', serverMessage);
+
 		console.log(`Room ${roomCode} created by ${player.name}`);
 		console.log(`Player list:`, rooms[roomCode].players);
 	});
@@ -70,6 +77,11 @@ io.on('connection', (socket) => {
 
 			// Notify the client
 			socket.emit('roomJoined', roomCode);
+
+			// Send a chat message to the room when the player joins
+			const serverMessage = `${name} joined ${roomCode}`;
+			io.to(roomCode).emit('chatMessage', serverMessage);
+
 			console.log(`${name} joined room ${roomCode}`);
 			console.log(`Player list:`, rooms[roomCode].players);
 		}
@@ -84,6 +96,14 @@ io.on('connection', (socket) => {
 
 			// Update room player list
 			io.to(roomCode).emit('playerList', rooms[roomCode].players);
+
+			// Send a chat message to the room when the player disconnects
+			const player = rooms[roomCode].players.find(p => p.id === socket.id);
+			if (player) {
+				const serverMessage = `${player.name} left the server.`;
+				io.to(roomCode).emit('chatMessage', serverMessage);
+			}
+
 			console.log('A player disconnected:', socket.id);
 
 			// If room is empty, delete it
