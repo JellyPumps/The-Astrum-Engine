@@ -115,13 +115,21 @@ io.on('connection', (socket) => {
 	});
 
 	// Handle chat
-	socket.on('chatMessage', ({ msg, roomCode }) => {
+	socket.on('chatMessage', ({ msg, roomCode, recipientId }) => {
 		const player = rooms[roomCode]?.players.find(p => p.id === socket.id);
 
 		if (player) {
 			const timestamp = new Date().toLocaleDateString([], { hour: '2-digit', minute: '2-digit' });
 			const messageData = player ? `| ${timestamp} | ${player.name} says: "${msg}"` : msg;
-			io.to(roomCode).emit('chatMessage', messageData);
+
+			if (recipientId) {
+				// Send private message to a specific user
+				socket.to(recipientId).emit('privateMessage', messageData);
+			} else {
+				// Broadcast to the room
+				io.to(roomCode).emit('chatMessage', messageData);
+			}
+			
 			console.log(messageData);
 		}
 	});
