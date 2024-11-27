@@ -17,24 +17,27 @@ function renderLobby() {
         roomCodeDisplay.textContent = `Room Code: ${sceneData.roomCode}`;
     }
 
-    /** Player list updates */
-    document.addEventListener('playerList', (event) => {
-        const players = event.detail;
-        const playerList = document.getElementById('player-list');
+    /** Send signal that scene has loaded */
+    document.dispatchEvent(new CustomEvent('lobbyLoaded'));
+}
 
-        if (playerList) {
+// Schedule the rendering function in the next animation frame.
+window.requestAnimationFrame(renderLobby);
+
+/** Player list updates */
+document.addEventListener('playerList', (event) => {
+    const players = event.detail;
+    const playerList = document.getElementById('player-list');
+
+    if (playerList) {
         playerList.innerHTML = '';
         players.forEach((player) => {
             const playerItem = document.createElement('li');
             playerItem.textContent = `${player.name} (${player.role})`;
             playerList.appendChild(playerItem);
         });
-        }
-    });
-}
-
-// Schedule the rendering function in the next animation frame.
-window.requestAnimationFrame(renderLobby);
+    }
+});
 
 /**
  * Exits the current lobby and loads the main menu scene.

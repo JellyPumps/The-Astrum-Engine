@@ -1,6 +1,7 @@
 const socket = io();
 
 let currentRoom = '';
+let lobbyLoaded = false;
 
 // Global event handlers
 socket.on('roomCreated', (roomCode) => {
@@ -12,7 +13,14 @@ socket.on('roomJoined', (roomCode) => {
 });
 
 socket.on('playerList', (players) => {
-	document.dispatchEvent(new CustomEvent('playerList', { detail: players }));
+	if (lobbyLoaded) {
+		updatePlayerList(players);
+	} else {
+		document.addEventListener('lobbyLoaded', () => {
+			updatePlayerList(players);
+			lobbyLoaded = true;
+		});
+	}
 });
 
 socket.on('chatMessage', (messageData) => {
@@ -22,6 +30,10 @@ socket.on('chatMessage', (messageData) => {
 socket.on('privateMessage', (messageData) => {
 	document.dispatchEvent(new CustomEvent('privateMessage', { detail: messageData }));
 })
+
+function updatePlayerList(players) {
+	document.dispatchEvent(new CustomEvent('playerList', { detail: players }));
+}
 
 // Error handling
 socket.on('error', (msg) => {
